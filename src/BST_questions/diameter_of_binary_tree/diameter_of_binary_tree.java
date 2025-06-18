@@ -44,24 +44,17 @@ public class diameter_of_binary_tree {
                 );
 
         System.out.println(diameterOfBinaryTree(myNode4));
-        //printTree(myNode);
     }
 
 
     public static int diameterOfBinaryTree(TreeNode root) {
         if (root == null) return 0;
         if(root.left!=null && root.right!=null){
-            var internalMaxLeft = 0;
-            var internalMaxRight = 0;
-
-            internalMaxLeft = Math.max(internalMaxLeft,traverseCount(root.left));
-            internalMaxRight = Math.max(internalMaxRight, traverseCount(root.right));
-
-            return internalMaxLeft + internalMaxRight;
+            return traverseCount(root.left) + traverseCount(root.right);
         } else if (root.left!=null) {
-            return diameterOfBinaryTree(root.left);
+            return Math.max(diameterOfBinaryTree(root.left), traverseCount(root.left));
         } else {
-            return diameterOfBinaryTree(root.right);
+            return Math.max(diameterOfBinaryTree(root.right), traverseCount(root.right));
         }
     }
 
