@@ -6,46 +6,43 @@ public class balanced_binary_tree {
     public static void main(String[] args) {
         var myNode =
                 new TreeNode(1,
-                        null,
-                        new TreeNode(2,
-                                new TreeNode(3,new TreeNode(5), null),
-                                new TreeNode(4, new TreeNode(6), null)
+                        new TreeNode(2),
+                        new TreeNode(3,
+                                new TreeNode(3),
+                                null
                         )
                 );
 
         var myNode2 =
                 new TreeNode(1,
-                        new TreeNode(9,
+                        new TreeNode(2),
+                        new TreeNode(3,
                                 new TreeNode(4,
-                                        new TreeNode(5,
-                                                new TreeNode(7),
-                                                null),
-                                        new TreeNode(6,
-                                                new TreeNode(2),
-                                                null)
+                                        new TreeNode(5),
+                                        null
                                 ),
                                 null
-                        ),
-                        null
+                        )
                 );
 
-        var myNode3 =
-                new TreeNode(1,
-                        new TreeNode(2),
-                        new TreeNode(3)
-                );
-
-        var myNode4 =
-                new TreeNode(1,
-                        new TreeNode(2),
-                        null
-                );
-
-        System.out.println(isBalanced(myNode4));
+        System.out.println(isBalanced(myNode2));
     }
 
 
     public static boolean isBalanced(TreeNode root) {
-        return false;
+        if (root==null) return true;
+
+        var leftMaxHeight = traverseCount(root.left);
+        var rightMaxHeight = traverseCount(root.right);
+        if(Math.abs(leftMaxHeight- rightMaxHeight) <= 1) {
+            return isBalanced(root.left) && isBalanced(root.right);
+        } else {
+            return false;
+        }
+    }
+
+    public static int traverseCount(TreeNode root) {
+        if(root == null) return 0;
+        return 1+(Math.max(traverseCount(root.left), traverseCount(root.right)));
     }
 }
