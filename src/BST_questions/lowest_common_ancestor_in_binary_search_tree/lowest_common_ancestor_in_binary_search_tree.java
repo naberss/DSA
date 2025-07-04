@@ -26,33 +26,21 @@ public class lowest_common_ancestor_in_binary_search_tree {
                         null
                 );
 
-        var myNode4 =
-                new TreeNode(1);
-
-
-        var myNode5 =
-                new TreeNode(3,
-                        new TreeNode(4,
-                                new TreeNode(1),
-                                null),
-                        new TreeNode(5,
-                                new TreeNode(2),
-                                null)
-                );
-
-        var myNode6 =
-                new TreeNode(3,
-                        new TreeNode(1),
-                        new TreeNode(2)
-                );
-
         lowestCommonAncestor(myNode, myNode2, myNode3);
     }
 
 
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-
-        return new TreeNode(0);
+        if (root == null || p == null || q == null) {
+            return null;
+        }
+        if (Math.max(p.val, q.val) < root.val) { // Ambos à esquerda
+            return lowestCommonAncestor(root.left, p, q);
+        } else if (Math.min(p.val, q.val) > root.val) { // Ambos à direita
+            return lowestCommonAncestor(root.right, p, q);
+        } else { // Um de cada lado ou igual ao root
+            return root;
+        }
     }
 }
 
