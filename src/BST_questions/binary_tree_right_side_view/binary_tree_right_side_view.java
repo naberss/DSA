@@ -1,28 +1,32 @@
 package BST_questions.binary_tree_right_side_view;
-
 import BST_questions.TreeNode;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class binary_tree_right_side_view {
-    List<Integer> res = new ArrayList<>();
+    List<Integer> myList = new ArrayList<Integer>();
+
 
     public List<Integer> rightSideView(TreeNode root) {
-        dfs(root, 0);
-        return res;
+        if(root==null){
+            return myList;
+        }
+
+        traverseAndPersist(root, 0);
+
+        return myList;
     }
 
-    private void dfs(TreeNode node, int depth) {
-        if (node == null) {
+    public void traverseAndPersist(TreeNode root, Integer depth) {
+        if (root == null){
             return;
         }
 
-        if (res.size() == depth) {
-            res.add(node.val);
+        if(myList.size() == depth){
+            myList.add(root.val);
         }
 
-        dfs(node.right, depth + 1);
-        dfs(node.left, depth + 1);
+        traverseAndPersist(root.right, depth+1);
+        traverseAndPersist(root.left, depth+1);
     }
 }
