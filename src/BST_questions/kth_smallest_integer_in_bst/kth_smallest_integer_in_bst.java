@@ -3,38 +3,46 @@ package BST_questions.kth_smallest_integer_in_bst;
 import BST_questions.TreeNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class kth_smallest_integer_in_bst {
-    public static void main(String[] args) {
-        var myNode =
-                new TreeNode(1,
-                        new TreeNode(2),
-                        new TreeNode(3)
-                );
+    List<Integer> values = new ArrayList<>();
 
-        var myNode2 =
-                new TreeNode(2,
-                        new TreeNode(1),
-                        new TreeNode(3)
-                );
+    public int kthSmallest(TreeNode root, int k) {
 
-        var myNode3 = new TreeNode(5,
-                new TreeNode(4),
-                new TreeNode(6,
-                        new TreeNode(3),
-                        new TreeNode(8)
-                )
-        );
+        if (root.right== null && root.left==null && k==1){
+            return root.val;
+        }
 
+        values.add(root.val);
 
+        if (root.left!=null){
+            traverAndRecord(root.left, Integer.MAX_VALUE);
+            if (values.size() >= k){
+                Collections.sort(values);
+                return values.get(k-1);
+            }
+        }
 
-        System.out.println(kthSmallest(myNode3, 5));
+        if (root.right!=null){
+            traverAndRecord(root.right, k);
+            Collections.sort(values);
+            return values.get(k-1);
+        }
+
+        return 1;
     }
 
+    public void traverAndRecord(TreeNode root, int k) {
 
-    public static int kthSmallest(TreeNode root, int k) {
-        return 1;
+        if(root == null){return;}
+        values.add(root.val);
+        if (values.size() == k){return;}
+
+        traverAndRecord(root.left, k);
+        traverAndRecord(root.right, k);
     }
 }
 
