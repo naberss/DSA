@@ -1,8 +1,5 @@
 package tries;
 
-import java.util.HashMap;
-import java.util.Map;
-
 //insert (inserts new children)
 //search (boolean indicating the word was found)
 //startsWith (receives an prefix and serch among root's children)
