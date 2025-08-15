@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class PrefixTree {
 
-    private class TrieNode {
+    private static class TrieNode {
         Boolean isLeaf;
         Map<Character, TrieNode> children;
     }
